@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  自动部署:
+  autoDeploy:
     runs-on: ubuntu-latest
     steps:
       - name: 检查分支
@@ -44,25 +44,25 @@ jobs:
           hexo clean
           hexo generate
 
-      # - name: 部署 GitHub Pages
-      #   run: |
-      #     git config --global user.name "Bobo"
-      #     git config --global user.email "287314864@qq.com"
-      #     # git clone https://github.com/daidaibo/daidaibo.github.io.git .deploy_git
-      #     hexo deploy
+      - name: 部署 GitHub Pages
+        run: |
+          git config --global user.name "Bobo"
+          git config --global user.email "287314864@qq.com"
+          # git clone https://github.com/daidaibo/daidaibo.github.io.git .deploy_git
+          hexo deploy
 
-      # - name: 部署 云服务器
-      #   uses: cross-the-world/scp-pipeline@master
-      #   with:
-      #     host: ${{ secrets.USER_HOST }}
-      #     user: ${{ secrets.USER_NAME }}
-      #     pass: ${{ secrets.USER_PASS }}
-      #     connect_timeout: 10s
-      #     local: './.deploy_git/*'
-      #     remote: /www/wwwroot/www.daidaibo.com
-
-      - name: 部署
-        uses: peaceiris/actions-gh-pages@v3
+      - name: 部署 云服务器
+        uses: cross-the-world/scp-pipeline@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          host: ${{ secrets.USER_HOST }}
+          user: ${{ secrets.USER_NAME }}
+          pass: ${{ secrets.USER_PASS }}
+          connect_timeout: 10s
+          local: './.deploy_git/*'
+          remote: /www/wwwroot/www.daidaibo.com
+
+      # - name: 部署
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./public
