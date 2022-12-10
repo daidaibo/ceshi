@@ -102,8 +102,11 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
+  # type: git
+  # repo: git@github.com:daidaibo/daidaibo.github.io.git
+  # branch: main
   type: git
-  repo: git@github.com:daidaibo/daidaibo.github.io.git
+  repo: https://daidaibo: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@github.com/daidaibo/ceshi.git
   branch: main
 
 search:
