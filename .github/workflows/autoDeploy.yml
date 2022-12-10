@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  autoDeploy:
+  自动部署:
     runs-on: ubuntu-latest
     steps:
       - name: 检查分支
