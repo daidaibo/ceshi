@@ -1,0 +1,68 @@
+name: 自动部署
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检查分支
+          uses: actions/checkout@v2
+          with:
+            ref: main
+
+      - name: 安装 Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: 安装 Hexo
+        run: |
+          export TZ='Asia/Shanghai'
+          npm install hexo-cli -g
+
+      - name: 缓存 NPM 依赖
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: node_modules
+          # key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+
+      - name: 安装依赖
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          npm install --save
+
+      - name: 构建
+        run: |
+          hexo clean
+          hexo generate
+
+      # - name: 部署 GitHub Pages
+      #   run: |
+      #     git config --global user.name "Bobo"
+      #     git config --global user.email "287314864@qq.com"
+      #     # git clone https://github.com/daidaibo/daidaibo.github.io.git .deploy_git
+      #     hexo deploy
+
+      # - name: 部署 云服务器
+      #   uses: cross-the-world/scp-pipeline@master
+      #   with:
+      #     host: ${{ secrets.USER_HOST }}
+      #     user: ${{ secrets.USER_NAME }}
+      #     pass: ${{ secrets.USER_PASS }}
+      #     connect_timeout: 10s
+      #     local: './.deploy_git/*'
+      #     remote: /www/wwwroot/www.daidaibo.com
+
+      - name: 部署
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
