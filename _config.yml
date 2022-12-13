@@ -13,7 +13,8 @@ timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://www.daidaibo.com
+url: https://www.daidaibo.com/
+root: /
 permalink: :year-:month-:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -102,11 +103,9 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  # type: git
-  # repo: git@github.com:daidaibo/daidaibo.github.io.git
-  # branch: main
   type: git
-  repo: https://daidaibo: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@github.com/daidaibo/ceshi.git
+  repo: git@github.com:daidaibo/daidaibo.github.io.git
+  # repo: https://daidaibo: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@github.com/daidaibo/test.git
   branch: main
 
 search:
@@ -116,3 +115,12 @@ search:
   # template: ./search.xml
   format: html
   limit: 20
+
+aplayer:
+  meting: true
+  asset_inject: false
+
+nofollow:
+  enable: true
+  field: site
+  exclude:

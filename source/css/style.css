@@ -1,0 +1,24 @@
+body::-webkit-scrollbar {
+  width: 0;
+}
+
+/* #page-header {
+  background-color: #fff;
+} */
+
+.aplayer .aplayer-lrc {
+  display: none !important;
+}
+
+#footer {
+  background: 0 0;
+}
+#footer::before {
+  background-color: rgba(0, 0, 0, 0);
+}
+#footer-wrap {
+  color: inherit;
+}
+#footer-wrap a {
+  color: inherit;
+}
